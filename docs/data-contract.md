@@ -1,0 +1,7 @@
+# 键序和范围语义
+
+int64/timestamp为有符号64位整数，timestamp是UTC微秒。decimal以字符串原文表达，scale固定且不允许有损舍入，precision限制有符号十进制整数位数，负零与零相等，1.2和1.20在scale2等值。string以UTF8字节比较，bytes输入标准base64解码后按无符号字节，boolean false<true。缺字段／错类型非法；null不参加普通大小比较，按该列nulls独立排序。
+
+元组先逐列比较，非null方向desc反转该列，null位置不反转。query.equal_prefix是从首列起的精确有类型值，之后一列可range或starts_with，不可同时有二者。range界为该列自然类型序，lower/upper和开闭不随desc改含义；null不属于普通range。精确null可以用于equal_prefix。starts_with只用string或bytes，bytes前缀用{base64:...}，空前缀匹配所有非null值。后续列无约束，row_id隐含升序且只为同业务键稳定排序。
+
+索引编码方案由编码器确定并写正式版本文档，不能把本资料的candidate-v1当成已有稳定编码承诺。每记录source_position为原数据快照中物理行号，重复键r2/r4业务值相同但row_id不同。rows_per_block=1强制重复组跨块。原数据不含人工预编码键或标准输出。初始工具仅核对元组列数。

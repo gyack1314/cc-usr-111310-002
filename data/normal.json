@@ -1,0 +1,97 @@
+{
+  "kind": "ordered-key-index",
+  "schema": [
+    {
+      "id": "factory",
+      "type": "string",
+      "direction": "asc",
+      "nulls": "last"
+    },
+    {
+      "id": "reading",
+      "type": "decimal",
+      "precision": 6,
+      "scale": 2,
+      "direction": "desc",
+      "nulls": "first"
+    },
+    {
+      "id": "blob",
+      "type": "bytes",
+      "direction": "asc",
+      "nulls": "last"
+    }
+  ],
+  "records": [
+    {
+      "row_id": "r1",
+      "key": [
+        "A",
+        "-1.20",
+        "AAE="
+      ],
+      "source_position": 0
+    },
+    {
+      "row_id": "r2",
+      "key": [
+        "A",
+        "1.2",
+        "AA=="
+      ],
+      "source_position": 1
+    },
+    {
+      "row_id": "r3",
+      "key": [
+        "A",
+        null,
+        ""
+      ],
+      "source_position": 2
+    },
+    {
+      "row_id": "r4",
+      "key": [
+        "A",
+        "1.20",
+        "AA=="
+      ],
+      "source_position": 3
+    },
+    {
+      "row_id": "r5",
+      "key": [
+        "B",
+        "0.00",
+        "/w=="
+      ],
+      "source_position": 4
+    },
+    {
+      "row_id": "r6",
+      "key": [
+        "A",
+        "-1.20",
+        "AA=="
+      ],
+      "source_position": 5
+    }
+  ],
+  "query": {
+    "equal_prefix": [
+      "A"
+    ],
+    "range": {
+      "lower": "-1.20",
+      "lower_closed": true,
+      "upper": "1.20",
+      "upper_closed": false
+    }
+  },
+  "snapshot": "keys-s1",
+  "encoding_version": "candidate-v1",
+  "memory_bytes": 256,
+  "max_open_files": 3,
+  "rows_per_block": 1
+}
